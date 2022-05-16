@@ -3,7 +3,7 @@ var body = document.getElementsByTagName("BODY")[0];
 var chatButton = document.createElement("BUTTON");
 var chatIcon = document.createElement('img')
 try {
-    var socket = io("http://localhost:3001", {
+    var socket = io("http://192.163.206.200:3001", {
         withCredentials: true,
         extraHeaders: {
             "my-custom-header": "abcd"
@@ -261,7 +261,7 @@ let agentJoined = false
 var initialMessages = []
 const fetchChatData = (ID) => {
     const data = { id: ID };
-    fetch('http://localhost:3001/chats/chat', {
+    fetch('http://192.163.206.200:3001/chats/chat', {
         method: 'POST', headers: {
             'Content-Type': 'application/json'
         }, body: JSON.stringify(data)
@@ -278,7 +278,7 @@ const fetchChatData = (ID) => {
                 // load all messages
                 console.log('ID:' + ID)
                 const LoadMessageID = { id: ID };
-                fetch('http://localhost:3001/chats/messages', {
+                fetch('http://192.163.206.200:3001/chats/messages', {
                     method: 'POST', headers: {
                         'Content-Type': 'application/json'
                     }, body: JSON.stringify(LoadMessageID)
@@ -326,7 +326,7 @@ const checkChat = () => {
         const join = response ?? false
         if (join) {
             console.log('image exists')
-            chatHeaderLeftImage.src = `http://localhost:3001/images/${response}`
+            chatHeaderLeftImage.src = `http://192.163.206.200:3001/images/${response}`
         }
     })
 }
@@ -450,7 +450,7 @@ socket.on('room joined', (data) => {
     console.log('agent jnoined with:' + data)
     if (!agentJoined) {
         localStorage.setItem('image', data.image)
-        chatHeaderLeftImage.src = `http://localhost:3001/images/${data.image}`
+        chatHeaderLeftImage.src = `http://192.163.206.200:3001/images/${data.image}`
         agentJoined = true
         chatHeaderRightButton.style.display='block'
         agentbox(data.agent)
